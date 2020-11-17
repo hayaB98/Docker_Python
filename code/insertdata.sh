@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd /root/Task3/code
+
 . ./getdata.sh
 
 cd ../Docker
