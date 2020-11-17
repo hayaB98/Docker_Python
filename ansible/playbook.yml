@@ -1,0 +1,37 @@
+---
+ - hosts: 192.168.56.105
+   become: yes
+   tasks:
+    - yum:
+       name:
+        - epel-release
+        - yum-utils
+        - python2
+       state: present
+       update_cache: yes
+    - command: "curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py"
+    - command: "python2 get-pip.py"
+    - pip:
+       name:
+        - pip
+        - docker
+        - docker-compose
+       state: present
+       extra_args: --upgrade
+    - service:
+        name: docker
+        state: started
+        enabled: yes
+    - copy:
+        src: /root/Task3
+        dest: /root
+    - command: "setenforce 0"
+    - docker_compose:
+        project_src: /root/Task3/Docker
+        state: absent
+    - docker_compose:
+        project_src: /root/Task3/Docker
+        build: yes
+        state: present
+    - cron:
+        job: "/root/Task3/code/insertdata.sh"
