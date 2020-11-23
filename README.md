@@ -1,4 +1,4 @@
-# Docker_Python<br />
+# Docker_Python
 Implement a flask Application that provides API’s to monitor the server’s status<br/>
 to run the application and database on another server<br/>
 run ansible-playbook playbook.yml <br/>
